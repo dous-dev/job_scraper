@@ -10,6 +10,8 @@ Projekt portfolio: czysta architektura, asynchroniczny backend i nowoczesny
 interfejs. Z założenia **odporny na awarie** — błąd jednego źródła nigdy nie
 przerywa całego wyszukiwania.
 
+![JobScout — zrzut ekranu aplikacji](docs/screenshot.png)
+
 ---
 
 ## ✨ Funkcje
@@ -74,6 +76,15 @@ Następnie otwórz **http://127.0.0.1:8000**.
 > w pliku `.env` jako `JOOBLE_API_KEY`. Bez klucza źródło Jooble jest po prostu
 > pomijane, a pozostałe portale działają normalnie. Klucze trzymamy wyłącznie
 > w `.env` (jest w `.gitignore`), nigdy w kodzie.
+
+### 🐳 Docker
+
+```bash
+docker build -t jobscout .
+docker run -p 8000:8000 -e JOOBLE_API_KEY=twoj_klucz jobscout
+```
+
+Aplikacja będzie dostępna pod **http://localhost:8000**.
 
 ## 🔌 API
 
