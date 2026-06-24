@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobScout — wyszukiwarka ofert pracy</title>
+  <meta name="description" content="Przeszukaj najpopularniejsze portale z ogłoszeniami w jednym miejscu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">JS</span>
+        <span class="brand-name">Job<span class="accent">Scout</span></span>
+      </a>
+      <nav class="header-nav">
+        <a href="https://github.com" target="_blank" rel="noopener" class="ghost-link">Portfolio project</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1 class="hero-title">Znajdź pracę na <span class="grad">wszystkich</span> portalach naraz</h1>
+      <p class="hero-sub">
+        Wpisz, czego szukasz — np. <em>„praca zdalna w księgowości”</em> albo <em>„stolarz w Łodzi”</em>.
+        Przeszukujemy tytuły <strong>i opisy</strong> ofert na kilku największych portalach jednocześnie.
+      </p>
+
+      <form id="search-form" class="search-card" autocomplete="off">
+        <div class="search-row">
+          <div class="field field-grow">
+            <label for="query">Czego szukasz?</label>
+            <input id="query" name="query" type="text" placeholder="np. księgowa, stolarz, python developer…" required />
+          </div>
+          <div class="field">
+            <label for="location">Lokalizacja <span class="muted">(opcjonalnie)</span></label>
+            <input id="location" name="location" type="text" placeholder="np. Łódź" />
+          </div>
+          <button type="submit" class="btn-primary" id="search-btn">
+            <span class="btn-label">Szukaj</span>
+            <span class="spinner" hidden></span>
+          </button>
+        </div>
+
+        <div class="search-options">
+          <label class="switch">
+            <input type="checkbox" id="remote-only" />
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+            <span>Tylko praca zdalna</span>
+          </label>
+
+          <div class="sources" id="sources">
+            <span class="sources-label">Źródła:</span>
+            <!-- chipy źródeł wstrzykiwane przez JS -->
+          </div>
+        </div>
+      </form>
+
+      <div class="examples">
+        <span>Przykłady:</span>
+        <button class="chip-example" data-q="praca zdalna w branży księgowości">praca zdalna — księgowość</button>
+        <button class="chip-example" data-q="stolarz Łódź">stolarz w Łodzi</button>
+        <button class="chip-example" data-q="kierowca kat C">kierowca kat. C</button>
+        <button class="chip-example" data-q="python developer remote">python developer (remote)</button>
+      </div>
+    </section>
+
+    <section id="status-bar" class="status-bar" hidden></section>
+
+    <section id="results" class="results" aria-live="polite"></section>
+
+    <section id="empty-state" class="empty-state">
+      <div class="empty-illustration">🔍</div>
+      <h2>Zacznij od wyszukiwania</h2>
+      <p>Wyniki z różnych portali pojawią się tutaj, posortowane według trafności.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>JobScout — projekt portfolio. Dane pochodzą z publicznych API portali z ogłoszeniami.</p>
+    </div>
+  </footer>
+
+  <template id="card-template">
+    <article class="job-card">
+      <div class="job-card-head">
+        <div class="job-logo" aria-hidden="true"></div>
+        <div class="job-head-text">
+          <h3 class="job-title"></h3>
+          <div class="job-company"></div>
+        </div>
+        <span class="source-badge"></span>
+      </div>
+      <div class="job-meta">
+        <span class="meta-item job-location"></span>
+        <span class="meta-item job-salary" hidden></span>
+        <span class="meta-item job-remote" hidden>🏠 Zdalnie</span>
+      </div>
+      <p class="job-desc"></p>
+      <div class="job-card-foot">
+        <span class="job-score" title="Trafność dopasowania"></span>
+        <a class="btn-open" target="_blank" rel="noopener">Otwórz ofertę →</a>
+      </div>
+    </article>
+  </template>
+
+  <script src="/app.js"></script>
+</body>
+</html>
